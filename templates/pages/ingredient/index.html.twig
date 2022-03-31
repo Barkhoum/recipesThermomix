@@ -7,10 +7,16 @@
 	<div class="container mt-4">
 		{% if not ingredients.items is same as([]) %}
 			<div class="row justify-content-between">
-				<div>
+				<div class='col-9'>
 					<h1>Liste des ingredients</h1>
 				</div>
+				<div class='col'>
+					<a href="{{ path('ingredient.new') }}" class="btn btn-success">
+						Ajouter un ingredient
+					</a>
+				</div>
 			</div>
+
 			{% for message in app.flashes('success') %}
 				<div class="alert alert-success mt-4">
 					{{ message }}
