@@ -22,40 +22,48 @@ class IngredientController extends AbstractController
      * @param Request $request
      * @return Response
      */
-    #[Route('/ingredient', name: 'ingredient_index', methods:['GET'])]
-    public function index(IngredientRepository $repository , PaginatorInterface $paginator, Request $request): Response
+    #[Route('/ingredient', name: 'ingredient.index', methods: ['GET'])]
+    public function index(IngredientRepository $repository, PaginatorInterface $paginator, Request $request): Response
     {
-        
+
         $ingredients = $paginator->paginate(
             $repository->findAll(),
-            $request->query->getInt('page', 1), 10
+            $request->query->getInt('page', 1),
+            10
         );
         return $this->render('pages/ingredient/index.html.twig', [
             'ingredients' => $ingredients
         ]);
     }
-    #[Route('/ingredient/nouveau', name:'ingredient.new', methods:['GET', 'POST'])]
+    #[Route('/ingredient/nouveau', name: 'ingredient.new', methods: ['GET', 'POST'])]
     public function new(
         Request $request,
-    EntityManagerInterface $manager): Response{
+        EntityManagerInterface $manager
+    ): Response {
 
         $ingredient = new Ingredient();
         $form = $this->createForm(IngredientType::class, $ingredient);
 
         $form->handleRequest($request);
-        if ($form->isSubmitted() && $form->isValid()){
+        if ($form->isSubmitted() && $form->isValid()) {
             $ingredient = $form->getData();
 
             $manager->persist($ingredient);
             $manager->flush();
 
-            return $this->redirectToRoute('ingredient_index');
-            
-    }
+            $this->addFlash(
+                'success',
+                'votre ingredient à été créé avec succes'
+            );
 
-        return $this->render('pages/ingredient/new.html.twig',[ 
-            'form' => $form->createView()]
+            return $this->redirectToRoute('ingredient.index');
+        }
+
+        return $this->render(
+            'pages/ingredient/new.html.twig',
+            [
+                'form' => $form->createView()
+            ]
         );
-
     }
 }

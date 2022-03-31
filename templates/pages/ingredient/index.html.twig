@@ -6,52 +6,66 @@
 {% block body %}
 	<div class="container mt-4">
 		{% if not ingredients.items is same as([]) %}
+<div class="row justify-content-between">
 
-<h1>Liste des ingredients</h1>
-
-Liste des ingredients
-
-<div class="count mt-4 text-end">
-
-				<h3>Il y a
-					{{ ingredients.getTotalItemCount }}
-					ingrédient(s)
-				</h3>
-
+				<div class="col-10">
+					<h1>Liste des ingredients</h1>
+				</div>
+				<div class="col">
+					<a href="{{ path('ingredient.new')}}" class="btn btn-success">Créer un ingredient</a>
+				</div>
 			</div>
 
+			{% for message in app.flashes('success') %}
 
-			<table class="table table-hover">
-				<thead>
-					<tr>
-						<th scope="col">Numéro</th>
-						<th scope="col">Nom</th>
-						<th scope="col">Prix</th>
-						<th scope="col">Date de création</th>
+				{{ path('ingredient.new')}}
+
+				{{ message }}
+			</div>
+		{% endfor %}
+
+
+		<div class="count mt-4 text-end">
+
+			<h3>Il y a
+				{{ ingredients.getTotalItemCount }}
+				ingrédient(s)
+			</h3>
+
+
+		</div>
+
+
+		<table class="table table-hover">
+			<thead>
+				<tr>
+					<th scope="col">Numéro</th>
+					<th scope="col">Nom</th>
+					<th scope="col">Prix</th>
+					<th scope="col">Date de création</th>
+				</tr>
+			</thead>
+			<tbody>
+				{% for ingredient in ingredients %}
+					<tr class="table-light">
+						<th scope="row">{{ ingredient.id }}</th>
+						<td>{{ ingredient.name }}</td>
+						<td>{{ ingredient.price}}</td>
+						<td>{{ingredient.createdAt|date('d/m/Y')}}</td>
 					</tr>
-				</thead>
-				<tbody>
-					{% for ingredient in ingredients %}
-						<tr class="table-light">
-							<th scope="row">{{ ingredient.id }}</th>
-							<td>{{ ingredient.name }}</td>
-							<td>{{ ingredient.price}}</td>
-							<td>{{ingredient.createdAt|date('d/m/Y')}}</td>
-						</tr>
-					{% endfor %}
+				{% endfor %}
 
-				</tbody>
-			</table>
-			<div class="navigation d-flex justify-content-center mt-4">
-				{{ knp_pagination_render(ingredients)}}
-			</div>
+			</tbody>
+		</table>
+		<div class="navigation d-flex justify-content-center mt-4">
+			{{ knp_pagination_render(ingredients)}}
+		</div>
 
-		{% else %}
-			<h4>Il n'y a pas d'ingrédients</h4>
+	{% else %}
+		<h4>Il n'y a pas d'ingrédients</h4>
 
-			<a href="{{ path('ingredient.new') }}" class="btn btn-primary">
-				Créer un ingrédient
-			</a>
-		{% endif %}
-	</div>
-{% endblock %}
+		<a href="{{ path('ingredient.new') }}" class="btn btn-primary">
+			Créer un ingrédient
+		</a>
+	{% endif %}
+</div>{% endblock %}
