@@ -7,11 +7,17 @@
 	<div class="container mt-4">
 		{% if not ingredients.items is same as([]) %}
 
-			<h1>Mes ingredients</h1>
+<h1>Liste des ingredients</h1>
 
-			<div class="count mt-4">Il y a
-				{{ ingredients.getTotalItemCount }}
-				ingrédient(s)
+Liste des ingredients
+
+<div class="count mt-4 text-end">
+
+				<h3>Il y a
+					{{ ingredients.getTotalItemCount }}
+					ingrédient(s)
+				</h3>
+
 			</div>
 
 
@@ -31,15 +37,15 @@
 							<td>{{ ingredient.name }}</td>
 							<td>{{ ingredient.price}}</td>
 							<td>{{ingredient.createdAt|date('d/m/Y')}}</td>
-							>
 						</tr>
 					{% endfor %}
 
 				</tbody>
 			</table>
 			<div class="navigation d-flex justify-content-center mt-4">
-				{{ knp_pagination_render(ingredients) }}
+				{{ knp_pagination_render(ingredients)}}
 			</div>
+
 		{% else %}
 			<h4>Il n'y a pas d'ingrédients</h4>
 
