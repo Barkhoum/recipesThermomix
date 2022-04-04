@@ -29,7 +29,7 @@ class IngredientController extends AbstractController
         Request $request
     ): Response {
         $ingredients = $paginator->paginate(
-            $repository->findAll(),
+            $repository->findBy([], ['id' => 'desc']),
             $request->query->getInt('page', 1),
             10
         );

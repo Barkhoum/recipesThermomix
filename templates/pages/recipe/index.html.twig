@@ -11,11 +11,16 @@
 					<h1>Liste des recettes</h1>
 				</div>
 				<div class='col'>
-					<a href="{{ path('ingredient.new') }}" class="btn btn-success">
+					<a href="{{ path('recipe.new') }}" class="btn btn-success">
 						Ajouter une recette
 					</a>
 				</div>
 			</div>
+			{% for message in app.flashes('success') %}
+				<div class="alert alert-success mt-4">
+					{{ message }}
+				</div>
+			{% endfor %}
 			<div class="count mt-4 text-end">
 				<h3>Il y a
 					{{ recipes.getTotalItemCount }}
@@ -35,21 +40,20 @@
 					</tr>
 				</thead>
 				<tbody>
-					{% for recipe in recipes %}
+					{% for recipe in recipes  %}
+
 						<tr class="table-light">
 							<th scope="row">{{ recipe.id }}</th>
 							<td>{{ recipe.name }}</td>
-							<td>{{ recipe.price is null ? "Null" : recipe.price }}</td>
-							<td>{{ recipe.difficulty is null ? "Null" : recipe.difficulty }}</td>
+							<td>{{ recipe.price is null ? "0" : recipe.price }}</td>
+							<td>{{ recipe.difficulty is null ? "0" : recipe.difficulty }}</td>
 							<td>{{recipe.createdAt|date('d/m/Y')}}</td>
-							{# <td>
-																						<a href="{{ path('recipe.edit', {id: ingredient.id}) }}" class="btn btn-success">Modifier</a>
-														
-																					</td>
-																					<td>
-																						<a href="{{ path('recipe.delete', {'id': ingredient.id}) }}" onclick="return confirm('Voulez-vous vraiment supprimer cet ingrédient ?')" class="btn btn-danger">Suprimer</a>
-														
-																					</td> #}
+							<td>
+								<a href="{{ path('recipe.edit', {id: recipe.id}) }}" class="btn btn-success">Modifier</a>
+							</td>
+							<td>
+								<a href="{{ path('recipe.delete', {'id': recipe.id}) }}" onclick="return confirm('Voulez-vous vraiment supprimer cette recette ?')" class="btn btn-danger">Suprimer</a>
+							</td>
 						</tr>
 					{% endfor %}
 				</tbody>
