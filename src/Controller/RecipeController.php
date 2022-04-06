@@ -3,8 +3,10 @@
 namespace App\Controller;
 
 
+use App\Entity\Ingredient;
 use App\Entity\Recipe;
 use App\Form\RecipeType;
+use App\Repository\IngredientRepository;
 use App\Repository\RecipeRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Knp\Component\Pager\PaginatorInterface;
@@ -18,7 +20,7 @@ class RecipeController extends AbstractController
     /**
      * This controller display all recipes
      *
-     * @param IngredientRepository $repository
+     * @param RecipeRepository $repository
      * @param PaginatorInterface $paginator
      * @param Request $request
      * @return Response
@@ -39,6 +41,12 @@ class RecipeController extends AbstractController
             'recipes' => $recipes,
         ]);
     }
+
+    /**
+     * @param Request $request
+     * @param EntityManagerInterface $manager
+     * @return Response
+     */
     #[Route('/recette/creation', 'recipe.new', methods:['GET', 'POST'])]
     public function new(
         Request $request,

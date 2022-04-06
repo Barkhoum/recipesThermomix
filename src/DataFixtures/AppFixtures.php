@@ -31,7 +31,7 @@ class AppFixtures extends Fixture
         $ingredients = [];
         for ($i = 1; $i < 50; $i++) {
             $ingredient = new Ingredient();
-            $ingredient->setName($this->faker->name())
+            $ingredient->setName($this->faker->text())
                 ->setPrice(mt_rand(1, 10));
 
             $ingredients[] = $ingredient;
