@@ -19,7 +19,7 @@ class Ingredient
     #[ORM\Column(type: 'string', length: 50)]
     #[Assert\NotBlank()]
     #[Assert\Length(min: 2, max: 50)]
-    private  string $name;
+    private string $name;
 
     #[ORM\Column(type: 'float')]
     #[Assert\NotNull()]
@@ -31,11 +31,19 @@ class Ingredient
     #[Assert\NotNull()]
     private ?\DateTimeImmutable $createdAt;
 
+    /**
+     * @ORM\Column(type="string")
+     */
+    #[ORM\ManyToOne(targetEntity: User::class, inversedBy: 'ingredients')]
+    #[ORM\JoinColumn(nullable: false)]
+    protected ?User $user;
+
 
     public function __construct()
     {
         $this->createdAt = new \DateTimeImmutable();
     }
+
     public function getId(): ?int
     {
         return $this->id;
@@ -76,7 +84,23 @@ class Ingredient
 
         return $this;
     }
-    public function __toString(){
+
+    public function __toString()
+    {
         return $this->name;
     }
+
+    public function getUser(): ?User
+    {
+        return $this->user;
+    }
+
+    public function setUser(?User $user): self
+    {
+        $this->user = $user;
+
+        return $this;
+    }
+
+
 }

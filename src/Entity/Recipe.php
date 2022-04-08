@@ -14,7 +14,7 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 #[ORM\HasLifecycleCallbacks]
 #[ORM\Entity(repositoryClass: RecipeRepository::class)]
 
-     
+
 class Recipe
 {
     #[ORM\Id]
@@ -64,6 +64,11 @@ class Recipe
 
     #[ORM\ManyToMany(targetEntity: Ingredient::class)]
     private $ingredients;
+
+    #[ORM\ManyToOne(targetEntity: User::class, inversedBy: 'recipes')]
+    #[ORM\JoinColumn(nullable: false)]
+    private $user;
+
 
     public function __construct()
     {
@@ -188,9 +193,8 @@ class Recipe
 
         return $this;
     }
-
     /**
-     * @return Collection<int, Ingredient>
+     * @return Collection|Ingredient[]
      */
     public function getIngredients(): Collection
     {
@@ -212,4 +216,19 @@ class Recipe
 
         return $this;
     }
+
+    public function getUser(): ?User
+    {
+        return $this->user;
+    }
+
+    public function setUser(?User $user): self
+    {
+        $this->user = $user;
+
+        return $this;
+    }
+
+
+
 }
