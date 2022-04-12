@@ -1,0 +1,65 @@
+{% extends 'base.html.twig' %}
+{% block title %}thermorientalix- {{ recipe.name }}
+{% endblock %}
+
+{% block body %}
+    <div class="container">
+        {% for message in app.flashes('success') %}
+            <div class="alert alert-success mt-4">
+                {{ message }}
+            </div>
+        {% endfor %}
+        <h1 class="mt-4">{{ recipe.name }}</h1>
+        <p>La moyenne de cette recette est de
+            {{ recipe.average|number_format(2, '.', ',') }}
+            /5</p>
+
+        <div>
+            <span class="badge bg-success">Créée le {{ recipe.createdAt|date('d/m/Y') }}</span>
+        </div>
+        <div class="mt-4">
+            {% if recipe.time %}
+                <p>Temps {{ recipe.time }}(en minutes):</p>
+            {% else %}
+                <p>Temps non renseigné</p>
+            {% endif %}
+        </div>
+        <div class="mt-4">
+            {% if recipe.nbsPersonnes %}
+            <p>Pour {{ recipe.nbsPersonnes }} personnes</p>
+            {% else %}
+        </div>
+        <div class="mt-4">
+            <p>Nombre de personnes non renseigné</p>
+            {% endif %}</div>
+
+        <div class="mt-4">
+            {% if recipe.difficulty %}
+                <p>Difulculté {{ recipe.difficulty }}</p>
+            {% else %}
+                <p>Difficulté non renseigné</p>
+            {% endif %}
+        </div>
+        <div class="mt-4">
+
+            {% if recipe.price %}
+                <p>Prix :
+                    {{ recipe.price }} €</p>
+            {% else %}
+                <p>Prix non renseigné</p>
+            {% endif %}
+        </div>
+        <div class="mt-4">
+            Déscription :
+            {{ recipe.description }}</div>
+        <div class="mt-4">
+            {% for ingredient in recipe.ingredients %}
+                <span class="badge bg-success mt-3"> {{ ingredient.name }}</span>
+            {% endfor %}
+        </div>
+        <div class="mt-4">
+            {{ form(form) }}
+        </div>
+    </div>
+{% endblock %}
+
