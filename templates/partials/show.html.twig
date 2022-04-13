@@ -1,23 +1,17 @@
-{% extends 'base.html.twig' %}
 
-{% block title %}Thermorientalix
-{% endblock %}
-
-{% block body %}
-	<div class="jumbotron jumbotron-fluid">
+<div class="jumbotron jumbotron-fluid">
 		<div class="container">
 			<h1 class="display-4">Bienvenue sur Thermorientalix</h1>
 			<p class="lead">This is a modified jumbotron that occupies the entire horizontal space of its parent.</p>
 			<hr class="my-4">
 			<p class="lead">Pour commencer rendez-vous sur la page d'inscription
 			</p>
-			<a type="button" class="btn btn-success" href="{{ path('security.login') }}">Inscription
+			<a type="button" class="btn btn-success" href="{{ path('security.registration') }}">Inscription
 			</a>
 
 		</div>
 	</div>
 
-{% endblock %}
 
 
 

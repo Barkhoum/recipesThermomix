@@ -1,5 +1,6 @@
 {
   "dependencies": {
+    "bootstrap-icons": "^1.8.1",
     "bootswatch": "^5.1.3"
   }
 }

@@ -6,6 +6,7 @@ use App\Entity\Recipe;
 use App\Entity\Ingredient;
 use App\Repository\IngredientRepository;
 use Symfony\Component\Form\AbstractType;
+use Vich\UploaderBundle\Form\Type\VichImageType;
 use Webmozart\Assert\Assert as AssertAssert;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
@@ -84,8 +85,8 @@ class RecipeType extends AbstractType
                 ]
 
             ])
-            ->add('difficulty', RangeType::class,[
-             'attr' => [
+            ->add('difficulty', RangeType::class, [
+                'attr' => [
                     'class' => 'form-range',
                     'min' => 1,
                     'max' => 5
@@ -101,8 +102,8 @@ class RecipeType extends AbstractType
                 ]
 
             ])
-            ->add('description', TextareaType::class,[
-                 'attr' => [
+            ->add('description', TextareaType::class, [
+                'attr' => [
                     'class' => 'form-control',
                     'min' => 1,
                     'max' => 5
@@ -113,8 +114,9 @@ class RecipeType extends AbstractType
                 ],
                 'constraints' => [
                     new Assert\NotBlank()
-                    ]
+                ]
             ])
+
             ->add('price', MoneyType::class, [
                 'attr' => [
                     'class' => 'form-control',
@@ -130,48 +132,53 @@ class RecipeType extends AbstractType
                 ]
 
             ])
-            ->add('isFavoris', CheckboxType::class,[
-            'attr' => [
-                'class' => 'form-check-label',
-                
-            ],
-            'required' => false,
-            'label' => ' Ajoutez le dans les favoris',
-            'label_attr'
-            => [
-                'class' => 'form-label mt-4'
-            ],
-            'constraints' => [
-                new Assert\NotNull()
+            ->add('isFavoris', CheckboxType::class, [
+                'attr' => [
+                    'class' => 'form-check-label',
+
+                ],
+                'required' => false,
+                'label' => ' Ajoutez le dans les favoris',
+                'label_attr'
+                => [
+                    'class' => 'form-label mt-4'
+                ],
+                'constraints' => [
+                    new Assert\NotNull()
                 ]
             ])
-            ->add('createdAt', DateType::class,[
-                 'widget' => 'choice',
-    'input'  => 'datetime_immutable',
-            'label' => 'Date de création',
-            'label_attr' => [
-                'class' => 'form-label mt-4'
-            ]
+            ->add('imageFile', VichImageType::class,[
+                'label' => 'Image de la recette',
+                'label_attr' => [
+                    'class' => 'form-label mt-4'
+                ]
             ])
-           
-         ->add('ingredients', EntityType::class, [
+            ->add('createdAt', DateType::class, [
+                'widget' => 'choice',
+                'input' => 'datetime_immutable',
+                'label' => 'Date de création',
+                'label_attr' => [
+                    'class' => 'form-label mt-4'
+                ]
+            ])
+
+            ->add('ingredients', EntityType::class, [
                 'class' => Ingredient::class,
                 'query_builder' => function (IngredientRepository $r) {
                     return $r->createQueryBuilder('i')
                         ->where('i.user = :user')
                         ->orderBy('i.name', 'DESC')
-                        ->setParameter('user',$this->token->getToken()->getUser() );
+                        ->setParameter('user', $this->token->getToken()->getUser());
 
                 },
-            'label' => 'Les ingrédients',
-            'label_attr' => [
-                'class' => 'form-label mt-4'
-            ],
-            'choice_label' => 'name',
-            'multiple' => true,
-            'expanded' => true,
-        ])
-
+                'label' => 'Les ingrédients',
+                'label_attr' => [
+                    'class' => 'form-label mt-4'
+                ],
+                'choice_label' => 'name',
+                'multiple' => true,
+                'expanded' => true,
+            ])
             ->add('submit', SubmitType::class, [
                 'attr' => [
                     'class' => 'btn btn-primary mt-4'
