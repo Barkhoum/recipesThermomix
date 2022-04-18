@@ -1,0 +1,10 @@
+
+<div class="nav-scroller py-1 mb-2">
+    <div class="nav-scroller py-1 mb-2">
+        <nav class="nav d-flex justify-content-between">
+           {% for categoryarticles in categories %}
+                <a class="p-2 text-muted text-decoration-none" href="{{ path('categoryarticles', {slug: categoryarticles.slug}) }}">{{ categoryarticles.name }}</a>
+            {% endfor %}
+        </nav>
+    </div>
+</div>

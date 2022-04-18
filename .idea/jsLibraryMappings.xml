@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="JavaScriptLibraryMappings">
-    <file url="PROJECT" libraries="{@popperjs/core, Chart.js, bootstrap, bootswatch, chart.js, feather-icons, font-awesome, icons, ionicons, jquery-3.3.1.slim, jquery-3.5.1.slim, popper.js}" />
+    <file url="PROJECT" libraries="{@icon/themify-icons, @popperjs/core, Chart.js, OwlCarousel2, SlickNav, animate.css, bootstrap, bootswatch, chart.js, feather-icons, font-awesome, gijgo, icons, ionicons, jquery-3.3.1.slim, jquery-3.5.1.slim, jquery-nice-select, magnific-popup.js, materialize, popper.js, slick-carousel}" />
   </component>
 </project>

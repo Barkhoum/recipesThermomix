@@ -1,0 +1,7 @@
+
+ <h4 class="fst-italic">Les articles en vedette</h4>
+ <ol class="list-unstyled mb-0">
+  {% for article in articles %}
+  <li> <a class="p-2 text-muted text-decoration-none" href="{{ path('article_show', {slug: article.slug}) }}">{{ article.title }}</a></li>
+  {% endfor %}
+ </ol>

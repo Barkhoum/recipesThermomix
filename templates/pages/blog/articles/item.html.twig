@@ -1,0 +1,24 @@
+
+
+<article class="mb-5">
+    <div class="row">
+        <div class="col-md-{{ leftCol ?? 5 }}">
+            {% if article.featuredImage %}
+                <a href="{{ path('article_show', { 'slug': article.slug }) }}" class="text-decoration-none">
+                    <img src="/uploads/{{ article.featuredImage.filename }}" alt="{{ article.featuredImage.altText }}" loading="lazy" width="350" height="200">
+                </a>
+            {% endif %}
+        </div>
+        <div class="card flex-md-row mb-4 box-shadow h-md-250">
+            <div class="col-md-{{ rightCol ?? 7 }}">
+                <strong class="d-inline-block mb-2 text-primary">category</strong>
+                <h3 class="mb-0">
+                    <a href="{{ path('article_show', { 'slug': article.slug }) }}" class="text-decoration-none">{{ article.title }}</a>
+                </h3>
+                <div class="mb-1 text-muted">{{ article.createdAt|date('d M Y') }}  <b></b></div>
+                <p class="card-text mb-auto"> {{ article.featuredText ?: article.description|striptags|slice(0,130)~'...'}}</p>
+                <a href="{{ path('article_show', { 'slug': article.slug }) }}">Continue reading</a>
+            </div>
+        </div>
+    </div>
+</article>

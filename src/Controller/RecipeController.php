@@ -147,10 +147,14 @@ class RecipeController extends AbstractController
 
         return $this->redirectToRoute('recipe.index');
     }
+
     /**
      * This controller allow us to see a recipe if this one is public
      *
      * @param Recipe $recipe
+     * @param Request $request
+     * @param MarkRepository $markRepository
+     * @param EntityManagerInterface $manager
      * @return Response
      */
     #[Security("is_granted('ROLE_USER') and (recipe.getIsPublic() === true || user === recipe.getUser())")]
@@ -197,7 +201,6 @@ class RecipeController extends AbstractController
             'form' => $form->createView()
         ]);
     }
-
 }
 
 
