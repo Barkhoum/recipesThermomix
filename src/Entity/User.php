@@ -28,9 +28,11 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[Assert\Length(min: 2, max: 50)]
     private string $fullName;
 
-    #[ORM\Column(type: 'string', length: 50, unique: true)]
-    #[Assert\Length(min: 2, max: 50)]
-    private ?string $pseudo;
+    #[ORM\Column(type: 'string', length: 50)]
+    #[Assert\NotBlank()]
+       #[Assert\Length(min: 2, max: 50)]
+    #[Assert\NotNull()]
+    private string $pseudo ;
 
     #[ORM\Column(type: 'string', length: 180, unique: true)]
     #[Assert\Email()]
@@ -73,7 +75,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         $this->commentaires = new ArrayCollection();
         $this->comments = new ArrayCollection();
 
-        $this->pseudo = new $pseudo;
 
 
 
@@ -99,12 +100,12 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    public function getPseudo(): ?string
+    public function getPseudo(): string
     {
         return $this->pseudo;
     }
 
-    public function setPseudo(?string $pseudo): self
+    public function setPseudo(string $pseudo): self
     {
         $this->pseudo = $pseudo;
 

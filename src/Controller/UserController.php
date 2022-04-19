@@ -14,7 +14,8 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Security\Core\Validator\Constraints\UserPassword;
 
-class UserController extends AbstractController
+class
+UserController extends AbstractController
 {
     /**
      * This controller allow us to edit user's profile

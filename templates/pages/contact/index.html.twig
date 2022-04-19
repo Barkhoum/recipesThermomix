@@ -6,8 +6,9 @@
 
     <section id="contact">
         <div class="container aos-init aos-animate" data-aos="fade-up">
+
             <div class="row">
-                <div class="col-md-12"><h3 class="section-title">{{ title }}</h3>
+                <div class="col-md-12"><h3 class="section-title"></h3>
                     <div class="section-title-divider"></div>
                     <p class="section-description">Sed ut perspiciatis unde omnis iste natus error sit voluptatem
                         accusantium doloremque</p></div>
@@ -24,8 +25,14 @@
                     </div>
                 </div>
                 <div class="col-lg-5 col-md-8">
+                    {% for message in app.flashes('success') %}
+                        <div class="alert alert-success mt-4">
+                            {{ message }}
+                        </div>
+                    {% endfor %}
                     <div class="form">
-                        <form action="forms/contact.php" method="post" role="form" class="php-email-form">
+                        <form action="" method="post" role="form" class="php-email-form">
+                            {{ form(form) }}
                             <div class="form-group"><input type="text" name="name" class="form-control" id="name"
                                                            placeholder="Your Name" required=""></div>
                             <div class="form-group mt-3"><input type="email" class="form-control" name="email"
@@ -47,5 +54,6 @@
                 </div>
             </div>
         </div>
+
     </section>
 {% endblock %}
