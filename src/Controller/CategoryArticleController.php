@@ -13,8 +13,11 @@ class CategoryArticleController extends AbstractController
     #[Route('/category/articles/{slug}', name: 'categoryarticles')]
     public function show(?Categoryarticles $categoryarticles): Response
     {
+
         return $this->render('pages/blog/categoryarticles/index.html.twig', [
-            'categoryarticles' => $categoryarticles,
+            'categoryarticles'=> $categoryarticles,
+
+
 
         ]);
     }

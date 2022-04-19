@@ -32,15 +32,11 @@ class Comment
     private ?Article $article;
 
 
-    public function __construct()
+    public function __construct(Article $article)
     {
         $this->createdAt = new \DateTimeImmutable();
         $this->updatedAt = new \DateTimeImmutable();
-
-
-
-
-
+        $this->article = $article;
     }
 
 
@@ -111,6 +107,6 @@ class Comment
 
     public function __toString(): string
     {
-        return "{$this->user->getEmail()} le {$this->createdAt->format('d/m/y à H:i:s')}";
+        return "{$this->user->getPseudo()} le {$this->createdAt->format('d/m/y à H:i:s')}";
     }
 }

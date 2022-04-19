@@ -10,12 +10,12 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class BlogController extends AbstractController
 {
-    #[Route('/blog', name: 'app_blog', methods: ['GET'])]
+    #[Route('/blog', name: 'app_blog')]
     public function index(ArticleRepository $articleRepo, CategoryarticlesRepository $categoryRepo): Response
     {
         return $this->render('pages/blog/index.html.twig', [
             'articles' => $articleRepo->findAll(),
-            'categories' => $categoryRepo->findAllForWidget()
+            'categories' => $categoryRepo->findAll()
         ]);
     }
 }

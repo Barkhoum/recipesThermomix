@@ -28,9 +28,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[Assert\Length(min: 2, max: 50)]
     private string $fullName;
 
-    #[ORM\Column(type: 'string', length: 50, nullable: true)]
+    #[ORM\Column(type: 'string', length: 50, unique: true)]
     #[Assert\Length(min: 2, max: 50)]
-    private ?string $pseudo= null;
+    private ?string $pseudo;
 
     #[ORM\Column(type: 'string', length: 180, unique: true)]
     #[Assert\Email()]
@@ -72,6 +72,8 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         $this->recipes = new ArrayCollection();
         $this->commentaires = new ArrayCollection();
         $this->comments = new ArrayCollection();
+
+        $this->pseudo = new $pseudo;
 
 
 
@@ -334,7 +336,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     public function __toString(): string
     {
-        return $this->email;
+        return $this->pseudo;
     }
 
 }

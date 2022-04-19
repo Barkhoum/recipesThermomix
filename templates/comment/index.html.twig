@@ -1,0 +1,14 @@
+{% set pseudo = comment.user.pseudo %}
+
+<div class="comment mb-5" id="comment-{{ comment.id }}">
+    <div class="card co">
+        <div class="card-body">
+            <h5 class="card-title">
+                <a href="#" class="text-decoration-none">
+                    <span class="comment-author">{{ pseudo }}</span>
+                </a>{{ comment.createdat|date('d M Y à H:i:s') }}
+            </h5>
+            <p class="'card-text">"{{ comment.description }}"</p>
+        </div>
+    </div>
+</div>
