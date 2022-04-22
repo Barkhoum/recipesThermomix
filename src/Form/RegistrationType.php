@@ -43,7 +43,7 @@ class RegistrationType extends AbstractType
                     'maxLength' => '50',
                 ],
                 'required'=> false,
-                'label' => 'Pseudo (Falcutatif)',
+                'label' => 'Pseudo (Public)',
                 'label_attr' => [
                     'class' => 'form-label mt-4'
                 ],
@@ -74,7 +74,8 @@ class RegistrationType extends AbstractType
                 'type' => PasswordType::class,
                 'first_options' => [
                     'attr' => [
-                        'class' => 'form-control'
+                        'class' => 'form-control',
+
                     ],
                     'label' => 'Mot de passe',
                     'label_attr' => [
@@ -88,11 +89,15 @@ class RegistrationType extends AbstractType
                     'label' => 'Confirmation du mot de passe',
                     'label_attr' => [
                         'class' => 'form-label  mt-4'
+                    ], 'constraints' => [
+                        new Assert\NotBlank(),
+                        new Assert\Length(['min' => 2, 'max' => 180])
                     ]
                 ],
                 'invalid_message' => 'Les mots de passe ne correspondent pas.'
             ])
             ->add('submit', SubmitType::class, [
+                'label' => 'Envoyer votre d\'inscription',
                 'attr' => [
                     'class' => 'btn btn-primary mt-4'
                 ]

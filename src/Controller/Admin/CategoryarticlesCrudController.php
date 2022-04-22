@@ -27,12 +27,28 @@ class CategoryarticlesCrudController extends AbstractCrudController
     {
         return Categoryarticles::class;
     }
+    public function configureCrud(Crud $crud): Crud {
+        return $crud
+            // the labels used to refer to this entity in titles, buttons, etc.
+            ->setEntityLabelInSingular('Categoryarticles')
+            ->setEntityLabelInPlural('Categories')
 
+            // in addition to a string, the argument of the singular and plural label methods
+            // can be a closure that defines two nullable arguments: entityInstance (which will
+            // be null in 'index' and 'new' pages) and the current page name
+            ->setEntityLabelInSingular(
+                fn (?Categoryarticles $categoryarticles, ?string $pageName) => $categoryarticles ? $categoryarticles->toString() : 'une catégorie pour les articles'
+            )
+            ->setEntityLabelInPlural(function (?Categoryarticles $categoryarticles, ?string $pageName) {
+                return 'edit' === $pageName ? $categoryarticles->getLabel() : 'Liste des categories du blog';
+            });
+    }
     public function configureActions(Actions $actions): Actions
     {
         $duplicate = Action::new(self::ACTION_DUPLICATE)
             ->linkToCrudAction('duplicateCategoryarticles')
             ->SetCssClass('btn btn-success');
+
 
         return $actions
             ->add(Crud::PAGE_EDIT, $duplicate)
@@ -50,7 +66,6 @@ class CategoryarticlesCrudController extends AbstractCrudController
             ->setBasePath(self::CATEGORYARTICLES_BASE_PATH)
             ->setUploadDir(self::CATEGORYARTICLES_UPLOAD_DIR)
             ->setSortable(false);
-        yield ColorField::new('color');
         yield BooleanField::new('isPublic');
         yield DateTimeFieldAlias::new('updatedAt')->hideOnForm();
         yield DateTimeFieldAlias::new('createdAt')->hideOnForm();

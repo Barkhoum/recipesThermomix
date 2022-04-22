@@ -24,6 +24,8 @@
     "build": "encore production --progress"
   },
   "devDependencies": {
-    "@babel/preset-react": "7.0.0"
+    "@babel/preset-react": "7.0.0",
+    "sass": "^1.50.1",
+    "sass-loader": "12.0.0"
   }
 }

@@ -202,4 +202,14 @@ class Categoryarticles
 
         return $this;
     }
+
+    public function getLabel(): ?string
+    {
+        return $this->name;
+    }
+
+    public function toString(): ?string
+    {
+        return $this->name;
+    }
 }

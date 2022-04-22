@@ -1,6 +1,3 @@
-import './styles/app.css';
-import './styles/bootstrap.min.css';
-
 
 document.addEventListener('DOMContentLoaded', () => {
     new App();
@@ -9,7 +6,9 @@ document.addEventListener('DOMContentLoaded', () => {
 class App {
     constructor() {
         this.handleCommentForm();
+
     }
+
 
     handleCommentForm() {
         const commentForm = document.querySelector('form.comment-form');

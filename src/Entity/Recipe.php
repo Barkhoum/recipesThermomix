@@ -85,12 +85,15 @@ class Recipe
 private ?float $average = null;
 
 
+
+
     public function __construct()
     {
         $this->ingredients = new ArrayCollection();
         $this->createdAt = new \DatetimeImmutable();
         $this->updatedAt = new \DatetimeImmutable();
         $this->marks = new ArrayCollection();
+
     }
     #[ORM\PrePersist()]
     public function setUpdatedAtValue()
@@ -338,6 +341,5 @@ private ?float $average = null;
 
         return $this->average;
     }
-
 
 }
